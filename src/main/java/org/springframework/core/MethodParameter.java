@@ -103,7 +103,7 @@ public class MethodParameter {
 			else {
 				this.parameterType = (this.method != null ?
 						this.method.getParameterTypes()[this.parameterIndex] :
-							this.consturctor.getParameterTypes()[this.parameterIndex]);
+						this.consturctor.getParameterTypes()[this.parameterIndex]);
 			}
 		}
 		return this.parameterType;
@@ -117,7 +117,7 @@ public class MethodParameter {
 			else {
 				this.genericParameterType = (this.method != null ?
 						this.method.getGenericParameterTypes()[this.parameterIndex] :
-							this.consturctor.getGenericParameterTypes()[this.parameterIndex]);
+						this.consturctor.getGenericParameterTypes()[this.parameterIndex]);
 			}
 		}
 		return this.genericParameterType;
