@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 public abstract class ObjectUtils {
 	
+	private static final int INITIAL_HASH = 7;
+	private static final int MULTIPLIER = 31;
+	
 	private static final String EMPTY_STRING = "";
 	private static final String NULL_STRING = "null";
 	private static final String ARRAY_START = "{";
@@ -295,5 +298,166 @@ public abstract class ObjectUtils {
 
 	public static boolean isEmpty(Object[] array) {
 		return (array == null || array.length == 0);
+	}
+
+	public static int nullSafeHashCode(Object obj) {
+		if (obj == null) {
+			return 0;
+		}
+		if (obj.getClass().isArray()) {
+			if (obj instanceof Object[]) {
+				return nullSafeHashCode((Object[]) obj);
+			}
+			if (obj instanceof boolean[]) {
+				return nullSafeHashCode((boolean[]) obj);
+			}
+			if (obj instanceof byte[]) {
+				return nullSafeHashCode((byte[]) obj);
+			}
+			if (obj instanceof char[]) {
+				return nullSafeHashCode((char[]) obj);
+			}
+			if (obj instanceof double[]) {
+				return nullSafeHashCode((double[]) obj);
+			}
+			if (obj instanceof float[]) {
+				return nullSafeHashCode((float[]) obj);
+			}
+			if (obj instanceof int[]) {
+				return nullSafeHashCode((int[]) obj);
+			}
+			if (obj instanceof long[]) {
+				return nullSafeHashCode((long[]) obj);
+			}
+			if (obj instanceof short[]) {
+				return nullSafeHashCode((short[]) obj);
+			}
+		}
+		return obj.hashCode();
+	}
+	
+	public static int nullSafeHashCode(Object[] array) {
+		if (array == null) {
+			return 0;
+		}
+		int hash = INITIAL_HASH;
+		int arraySize = array.length;
+		for (int i = 0; i < arraySize; i++) {
+			hash = MULTIPLIER * hash + nullSafeHashCode(array[i]);
+		}
+		return hash;
+	}
+
+	public static int nullSafeHashCode(boolean[] array) {
+		if (array == null) {
+			return 0;
+		}
+		int hash = INITIAL_HASH;
+		int arraySize = array.length;
+		for (int i = 0; i < arraySize; i++) {
+			hash = MULTIPLIER * hash + hashCode(array[i]);
+		}
+		return hash;
+	}
+
+	public static int nullSafeHashCode(byte[] array) {
+		if (array == null) {
+			return 0;
+		}
+		int hash = INITIAL_HASH;
+		int arraySize = array.length;
+		for (int i = 0; i < arraySize; i++) {
+			hash = MULTIPLIER * hash + array[i];
+		}
+		return hash;
+	}
+
+	public static int nullSafeHashCode(char[] array) {
+		if (array == null) {
+			return 0;
+		}
+		int hash = INITIAL_HASH;
+		int arraySize = array.length;
+		for (int i = 0; i < arraySize; i++) {
+			hash = MULTIPLIER * hash + array[i];
+		}
+		return hash;
+	}
+
+	public static int nullSafeHashCode(double[] array) {
+		if (array == null) {
+			return 0;
+		}
+		int hash = INITIAL_HASH;
+		int arraySize = array.length;
+		for (int i = 0; i < arraySize; i++) {
+			hash = MULTIPLIER * hash + hashCode(array[i]);
+		}
+		return hash;
+	}
+
+	public static int nullSafeHashCode(float[] array) {
+		if (array == null) {
+			return 0;
+		}
+		int hash = INITIAL_HASH;
+		int arraySize = array.length;
+		for (int i = 0; i < arraySize; i++) {
+			hash = MULTIPLIER * hash + hashCode(array[i]);
+		}
+		return hash;
+	}
+
+	public static int nullSafeHashCode(int[] array) {
+		if (array == null) {
+			return 0;
+		}
+		int hash = INITIAL_HASH;
+		int arraySize = array.length;
+		for (int i = 0; i < arraySize; i++) {
+			hash = MULTIPLIER * hash + array[i];
+		}
+		return hash;
+	}
+
+	public static int nullSafeHashCode(long[] array) {
+		if (array == null) {
+			return 0;
+		}
+		int hash = INITIAL_HASH;
+		int arraySize = array.length;
+		for (int i = 0; i < arraySize; i++) {
+			hash = MULTIPLIER * hash + hashCode(array[i]);
+		}
+		return hash;
+	}
+
+	public static int nullSafeHashCode(short[] array) {
+		if (array == null) {
+			return 0;
+		}
+		int hash = INITIAL_HASH;
+		int arraySize = array.length;
+		for (int i = 0; i < arraySize; i++) {
+			hash = MULTIPLIER * hash + array[i];
+		}
+		return hash;
+	}
+
+	public static int hashCode(boolean bool) {
+		return bool ? 1231 : 1237;
+	}
+
+	public static int hashCode(double dbl) {
+		long bits = Double.doubleToLongBits(dbl);
+		return hashCode(bits);
+	}
+
+	public static int hashCode(float flt) {
+		return Float.floatToIntBits(flt);
+	}
+
+	public static int hashCode(long lng) {
+		return (int) (lng ^ (lng >>> 32));
 	}
 }
